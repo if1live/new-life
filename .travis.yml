@@ -22,11 +22,11 @@ script:
   - python main.py build
 
 after_success:
-  - git clone --depth 1 --quite https://${GH_TOKEN}@github.com/if1live/new-life.git output
+  - git clone --depth 1 --quiet https://${GH_TOKEN}@github.com/if1live/new-life.git output
   - cd output
   - git checkout gh-pages
   - cp -R ../build/* .
-  - git push https://${GH_TOKEN}@github.com/if1live/new-life.git gh-pages --quite
+  - git push https://${GH_TOKEN}@github.com/if1live/new-life.git gh-pages --quiet
 
 branches:
   only:
