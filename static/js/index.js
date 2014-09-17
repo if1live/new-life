@@ -70,7 +70,6 @@ $(document).ready(function(){
       day: slotMachineData.day,
       gender: slotMachineData.gender === 0 ? 'm' : 'f'
     };
-
     var generator = new person_gen.SSNGenerator(opts);
     var value = generator();
     var fakeFilter = new person_gen.FakeSSNFilter();
@@ -91,9 +90,9 @@ $(document).ready(function(){
       var firstName = $('.text-machine-first-name-female > > :eq(' + (firstNameIdx) + ')').text();
     }
 
-    var year = yearSlot.active().el.innerText;
+    var year = yearSlot.active().el.innerHTML;
     var monthIdx = monthSlot.active().index;
-    var month = monthSlot.active().el.innerText;
+    var month = monthSlot.active().el.innerHTML;
 
     if(DAY_TABLE[monthIdx] === 28) {
       var dayIdx = day28Slot.active().index;
@@ -110,7 +109,7 @@ $(document).ready(function(){
     }
 
     var area = areaSlot.active().index;
-    var areaName = areaSlot.active().el.innerText;
+    var areaName = areaSlot.active().el.innerHTML;
     var areaTable = [
       [0, 8],
       [9, 12],
