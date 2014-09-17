@@ -1,8 +1,311 @@
+<!doctype html>
+{% import '_macros.html' as macros %}
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>새로운 개인정보로 새로운 인생, New Life</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<!--
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+-->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
-hello world
+<div class="container">
+    <!-- Static navbar -->
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">New Life</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">협력업체 <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="http://trademyinfo.libsora.so/">
+                                    No.1 온라인 개인정보 거래소 Trade My Info
+                            </a>
+                            </li>
+                            <li>
+                                <a href="http://newlife.libsora.so">
+                                    새로운 개인정보, 새로운 인생 New Life
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+    </div>
+
+
+    <!-- Jumbotron -->
+    <div class="jumbotron">
+        <h1>New Life</h1>
+        <h2>새로운 개인정보, 새로운 인생</h2>
+        <p class="lead">
+            현대사회는
+            <a href="http://trademyinfo.libsora.so">금융기관</a>,
+            <a href="http://www.newsis.com/ar_detail/view.html?ar_id=NISX20140915_0013169701&cID=10305&pID=10300">정부</a>가 앞장서서 개인정보를 팔아먹는 창조경제의 시대입니다.
+            이로인해 수많은 사람들의 개인정보는 이미 공공재입니다.
+            태어나면 발급받는 주민등록번호를 왜 유출된 다음에 다시는 바꿀 수 없나요?
+            주소정보를 팔아먹으면 새로운 주소를 얻기 위해서 이사를 다니라고요?
+            개인정보를 팔아먹은 인간들때문에 내가 폰 번호를 바꿔야되나요?
+        </p>
+        <p class="lead">
+            New Life를 이용해 새로운 개인정보를 발급받으면 새로운 인생을 살 수 있습니다.
+            개인정보가 유출된거같다고요? 걱정마세요. 다시 발급받으면 됩니다.
+        </p>
+        <p>
+            <a class="btn btn-lg btn-success" href="#slotmachine" role="button">시작하기</a>
+        </p>
+    </div>
+
+    <!-- slot machine -->
+    <div class="row" id="slotmachine">
+        <div class="col-md-6 column-header">
+            <div class="field-label">성별</div>
+        </div>
+        <div class="col-md-6 column-data">
+            <!-- 요소의 수가 적으면 회전하는 느낌이 안난다. 그래서 가짜로 반복 -->
+            <div class="text-machine text-machine-gender">
+                {% for x in range(1, 4) %}
+                <div>남</div>
+                <div>여</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 column-header">
+            <div class="field-label">이름</div>
+        </div>
+        <div class="col-md-6 column-data">
+            <div class="text-machine text-machine-last-name">
+                {% for x in last_name_list %}
+                <div>{{ x }}</div>
+                {% endfor %}
+            </div>
+            <div class="text-machine text-machine-first-name text-machine-first-name-male">
+                {% for x in male_name_list %}
+                <div>{{ x }}</div>
+                {% endfor %}
+            </div>
+            <div class="text-machine text-machine-first-name text-machine-first-name-female">
+                {% for x in female_name_list %}
+                <div>{{ x }}</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 column-header">
+            <div class="field-label">생년월일</div>
+        </div>
+        <div class="col-md-6 column-data">
+            <div class="text-machine text-machine-year">
+                {% for x in range(1960, 1999+1) %}
+                <div>{{ x }}년</div>
+                {% endfor %}
+            </div>
+
+            <div class="text-machine text-machine-month">
+                {% for x in range(1, 12+1) %}
+                <div>{{ x }}월</div>
+                {% endfor %}
+            </div>
+
+            <div class="text-machine text-machine-day text-machine-day-28">
+                {% for x in range(1, 28+1) %}
+                <div>{{ x }}일</div>
+                {% endfor %}
+            </div>
+            <div class="text-machine text-machine-day text-machine-day-30">
+                {% for x in range(1, 30+1) %}
+                <div>{{ x }}일</div>
+                {% endfor %}
+            </div>
+            <div class="text-machine text-machine-day text-machine-day-31">
+                {% for x in range(1, 31+1) %}
+                <div>{{ x }}일</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 column-header">
+            <div class="field-label">거주지</div>
+        </div>
+        <div class="col-md-6 column-data">
+            <div class="text-machine text-machine-area">
+                {% for x in area_list %}
+                <div>{{ x }}</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 column-header">
+            <div class="field-label">휴대폰번호</div>
+        </div>
+        <div class="col-md-6 column-data">
+            <div class="text-machine text-machine-phone-0">
+                <div>010</div>
+                <div>011</div>
+                <div>017</div>
+                <div>018</div>
+                <div>019</div>
+            </div>
+            &nbsp;
+            <div class="text-machine text-machine-phone-1">
+                <div>1234</div>
+            </div>
+            &nbsp;
+            <div class="text-machine text-machine-phone-2">
+                <div>1234</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 column-header">
+            <div class="field-label">전화번호</div>
+        </div>
+        <div class="col-md-6 column-data">
+            <div class="text-machine text-machine-tel-0">
+                <div>02</div>
+                <div>051</div>
+                <div>053</div>
+                <div>032</div>
+                <div>062</div>
+                <div>042</div>
+                <div>052</div>
+                <div>044</div>
+                <div>031</div>
+                <div>033</div>
+                <div>043</div>
+                <div>041</div>
+                <div>063</div>
+                <div>061</div>
+                <div>054</div>
+                <div>055</div>
+                <div>064</div>
+            </div>
+            &nbsp;
+            <div class="text-machine text-machine-tel-1">
+                <div>1234</div>
+            </div>
+            &nbsp;
+            <div class="text-machine text-machine-tel-2">
+                <div>1234</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 column-header">
+            <div class="field-label">주민등록번호</div>
+        </div>
+        <div class="col-md-6 column-data">
+            <div class="text-machine">
+                <div class="val-jumin">-</div>
+            </div>
+        </div>
+    </div>
+
+
+    <p class="text-center">
+        <button class="btn btn-primary btn-run-slot-machine btn-lg">새로운 개인정보 생성</button>
+    </p>
+    <p class="text-center">
+        <!-- social -->
+        {{ macros.render_twitter_share() }}
+        {{ macros.render_facebook_like() }}
+    </p>
+
+    <h2>주의사항</h2>
+    <div>
+        <p>
+        생성기는 주민등록의 공식을 이용해서
+        <strong>올바르지 않은 주민등록번호</strong>
+        <s><a href="http://mirror.enha.kr/wiki/%EC%9E%90%EC%BF%A0%EC%99%80%EB%8A%94%20%EB%8B%A4%EB%A5%B4%EB%8B%A4%20%EC%9E%90%EC%BF%A0%EC%99%80%EB%8A%94">가짜주민등록번호와는 다르다, 가짜주민등록번호와는</a></s>
+        만을 생성합니다. 이는 주민등록법을 회피하는 것이 목적입니다.
+        올바르지 않은 주민등록번호이기 때문에 어떤 사이트에서도 사용할 수 없습니다.
+
+        생성된 정보를 이용하다 문제가 발생한 경우 해당 사이트는 책임을 지지 않습니다.
+        </p>
+        <blockquote class="blockquote-alert">
+            <p>
+                다음 각 호의 어느 하나에 해당하는 자는 3년 이하의 징역 또는 1천만원 이하의 벌금에 처한다.  개정 2009.4.1
+            </p>
+            <ol>
+                <li>제7조제4항에 따른 주민등록번호 부여방법으로 거짓의 주민등록번호를 만들어 자기 또는 다른 사람의 재물이나 재산상의 이익을 위하여 사용한 자</li>
+                <li>주민등록증을 채무이행의 확보 등의 수단으로 제공한 자 또는 그 제공을 받은 자</li>
+                <li>제10조제2항을 위반한 자나 주민등록 또는 주민등록증에 관하여 거짓의 사실을 신고 또는 신청한 자</li>
+                <li>거짓의 주민등록번호를 만드는 프로그램을 다른 사람에게 전달하거나 유포한 자</li>
+                <li>제29조제2항부터 제4항까지의 규정을 위반하여 거짓이나 그 밖의 부정한 방법으로 다른 사람의 주민등록표를 열람하거나 그 등본 또는 초본을 교부받은 자</li>
+                <li>제30조제5항을 위반한 자</li>
+                <li>제31조제2항 또는 제3항을 위반한 자</li>
+                <li>다른 사람의 주민등록증을 부정하게 사용한 자</li>
+                <li>법률에 따르지 아니하고 영리의 목적으로 다른 사람의 주민등록번호에 관한 정보를 알려주는 자</li>
+                <li>다른 사람의 주민등록번호를 부정하게 사용한 자. 다만, 직계혈족·배우자·동거친족 또는 그 배우자 간에는 피해자가 명시한 의사에 반하여 공소를 제기할 수 없다.</li>
+            </ol>
+            <footer>
+                <a href="http://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A3%BC%EB%AF%BC%EB%93%B1%EB%A1%9D%EB%B2%95(10733)">주민등록법</a> 제37조(벌칙)
+            </footer>
+        </blockquote>
+    </ul>
+
+    <!-- comment -->
+    {{ macros.render_disqus() }}
+
+    <!-- Site footer -->
+    <div class="footer">
+        <p>
+            <a href="https://github.com/if1live/new-life/blob/master/LICENSE">MIT License</a>
+            <a href="https://twitter.com/if1live">@if1live</a>
+            2014
+        </p>
+    </div>
+
+    <!-- github fork -->
+    {{ macros.render_github_fork() }}
+</div><!-- //.container -->
+
+
+<!-- script -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="{{ url_for('static', filename='js/jquery.slotmachine.min.js') }}"></script>
+<script src="{{ url_for('static', filename='libs/js/sprintf.min.js') }}"></script>
+<script src="{{ url_for('static', filename='libs/js/assert.js') }}"></script>
+<script src="{{ url_for('static', filename='js/base.js') }}"></script>
+<script src="{{ url_for('static', filename='js/person_gen.js') }}"></script>
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+
+{{ macros.render_google_analytics('UA-43577716-3') }}
 </body>
 </html>

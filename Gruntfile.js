@@ -11,17 +11,14 @@ module.exports = function(grunt) {
       glob: {
         files: {
           'static/libs/js': [
-            'bootstrap/dist/js/*.js',
-            'jquery/dist/*.js',
-            'assert/*.js',
-            'mocha/*.js'
+            'sprintf/dist/*.js',
+            'mocha/*.js',
+            'assert/*.js'
           ],
           'static/libs/css': [
-            'bootstrap/dist/css/*.css',
             'mocha/*.css'
           ],
           'static/libs/fonts': [
-            'bootstrap/dist/fonts/*'
           ]
         }
       }

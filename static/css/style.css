@@ -1,0 +1,52 @@
+body {
+}
+
+.navbar {
+    margin-top: 20px;
+}
+
+.field-label {
+    font-size: 24px;
+    font-weight: bold;
+    height: 40px;
+}
+
+@media (min-width: 992px) {
+    .column-header {
+        text-align: right;
+    }
+}
+.column-data {
+    color: #666;
+}
+
+
+/* begin slot machine */
+.text-machine {
+    /*width:520px;*/
+    height: 40px;
+    font-size: 24px;
+    overflow: hidden;
+    display: inline-block;
+    text-align: center;
+}
+.text-machine > * {
+    padding: 0px 0px;
+}
+
+.text-machine-first-name-male,
+.text-machine-first-name-female {
+    display: none;
+}
+
+.text-machine-day-28,
+.text-machine-day-30,
+.text-machine-day-31 {
+    display: none;
+}
+/* end slot machine */
+
+
+.blockquote-alert {
+    font-size: small;
+}

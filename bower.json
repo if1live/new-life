@@ -1,8 +1,10 @@
 {
   "name": "new-life",
   "dependencies": {
-    "bootstrap": "~v3.2.0",
     "jquery": "~1.11.1",
-    "mocha": "~1.17.1"
+    "jquery.easing": "~v1.3.0",
+    "sprintf": "~1.0.0",
+    "mocha": "~1.17.1",
+    "assert": "~0.0.1"
   }
 }

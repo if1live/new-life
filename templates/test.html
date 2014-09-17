@@ -1,0 +1,41 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>Mocha Tests</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='libs/css/mocha.css') }}"/>
+</head>
+
+<body>
+<div id="mocha"></div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
+
+<script src="{{ url_for('static', filename='libs/js/mocha.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/jquery.slotmachine.min.js') }}"></script>
+<script src="{{ url_for('static', filename='libs/js/sprintf.min.js') }}"></script>
+<script src="{{ url_for('static', filename='libs/js/assert.js') }}"></script>
+
+
+<!-- target library -->
+<script src="{{ url_for('static', filename='js/base.js') }}"></script>
+<script src="{{ url_for('static', filename='js/person_gen.js') }}"></script>
+
+<script>mocha.setup('bdd')</script>
+
+
+
+<!-- unit test -->
+<script src="{{ url_for('static', filename='test/base-test.js') }}"></script>
+<script src="{{ url_for('static', filename='test/person_gen-test.js') }}"></script>
+
+<script>
+mocha.checkLeaks();
+mocha.globals(['jQuery']);
+mocha.run();
+</script>
+</script>
+
+</body>
+</html>
