@@ -9,6 +9,8 @@ env:
 
 
 before_script:
+  - git config --global user.email "libsora25@gmail.com"
+  - git config --global user.name "Travis"
   - pip install -r requirements.txt
   - npm install -g grunt-cli
   - npm install -g bower
