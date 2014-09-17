@@ -22,7 +22,7 @@ script:
   - python main.py build
 
 after_success:
-  - git clone --depth 1 --quiet https://${GH_TOKEN}@github.com/if1live/new-life.git output
+  - git clone --quiet https://${GH_TOKEN}@github.com/if1live/new-life.git output
   - cd output
   - git checkout gh-pages
   - cp -R ../build/* .
