@@ -1,0 +1,20 @@
+{
+  "name": "new-life",
+  "description": "새로운 개인정보로 새로운 출발",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/if1live/new-life.git"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/if1live/new-life/blob/master/LICENSE"
+    }
+  ],
+  "dependencies": {
+    "grunt-bowercopy": "*",
+    "grunt-contrib-uglify": "*",
+    "assert": "*"
+  }
+}
