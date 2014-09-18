@@ -14,13 +14,6 @@ function createPhoneNumberSequence(size) {
 $(document).ready(function(){
   var DAY_TABLE = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-  var basicParam = {
-    delay: 200
-  };
-  var dayParam = {
-    delay: 200
-  };
-
   var phoneSelectorList = [
     '.text-machine-tel-1',
     '.text-machine-tel-2',
@@ -30,7 +23,7 @@ $(document).ready(function(){
   for(var i = 0 ; i < phoneSelectorList.length ; ++i) {
     var selector = phoneSelectorList[i];
     $(selector).empty();
-    var seq = createPhoneNumberSequence(50);
+    var seq = createPhoneNumberSequence(10);
     for(var j = 0 ; j < seq.length ; ++j) {
       var node = document.createElement('div');
       node.innerHTML = seq[j];
@@ -38,28 +31,43 @@ $(document).ready(function(){
     }
   }
 
-  var genderSlot = $(".text-machine-gender").slotMachine(basicParam);
-  var lastNameSlot = $('.text-machine-last-name').slotMachine(basicParam);
+  var genderParam = {
+    delay: 200
+  };
+  var genderSlot = $(".text-machine-gender").slotMachine(genderParam);
 
-  var maleFirstNameSlot = $('.text-machine-first-name-male').slotMachine(basicParam);
-  var femaleFirstNameSlot = $('.text-machine-first-name-female').slotMachine(basicParam);
+  var nameParam = {
+    delay: 400
+  };
+  var lastNameSlot = $('.text-machine-last-name').slotMachine(nameParam);
+  var maleFirstNameSlot = $('.text-machine-first-name-male').slotMachine(nameParam);
+  var femaleFirstNameSlot = $('.text-machine-first-name-female').slotMachine(nameParam);
 
-  var yearSlot = $(".text-machine-year").slotMachine(basicParam);
-  var monthSlot = $(".text-machine-month").slotMachine(basicParam);
+  var dateParam = {
+    delay: 400
+  };
+  var yearSlot = $(".text-machine-year").slotMachine(dateParam);
+  var monthSlot = $(".text-machine-month").slotMachine(dateParam);
 
-  var day28Slot = $(".text-machine-day-28").slotMachine(dayParam);
-  var day30Slot = $(".text-machine-day-30").slotMachine(dayParam);
-  var day31Slot = $(".text-machine-day-31").slotMachine(dayParam);
+  var day28Slot = $(".text-machine-day-28").slotMachine(dateParam);
+  var day30Slot = $(".text-machine-day-30").slotMachine(dateParam);
+  var day31Slot = $(".text-machine-day-31").slotMachine(dateParam);
 
-  var areaSlot = $(".text-machine-area").slotMachine(basicParam);
+  var areaParam = {
+    delay: 300
+  };
+  var areaSlot = $(".text-machine-area").slotMachine(areaParam);
 
-  var tel0Slot = $(".text-machine-tel-0").slotMachine(basicParam);
-  var tel1Slot = $(".text-machine-tel-1").slotMachine(basicParam);
-  var tel2Slot = $(".text-machine-tel-2").slotMachine(basicParam);
+  var phoneParam = {
+    delay: 400
+  };
+  var tel0Slot = $(".text-machine-tel-0").slotMachine(phoneParam);
+  var tel1Slot = $(".text-machine-tel-1").slotMachine(phoneParam);
+  var tel2Slot = $(".text-machine-tel-2").slotMachine(phoneParam);
 
-  var phone0Slot = $(".text-machine-phone-0").slotMachine(basicParam);
-  var phone1Slot = $(".text-machine-phone-1").slotMachine(basicParam);
-  var phone2Slot = $(".text-machine-phone-2").slotMachine(basicParam);
+  var phone0Slot = $(".text-machine-phone-0").slotMachine(phoneParam);
+  var phone1Slot = $(".text-machine-phone-1").slotMachine(phoneParam);
+  var phone2Slot = $(".text-machine-phone-2").slotMachine(phoneParam);
 
 
   function createCard() {
@@ -144,57 +152,80 @@ $(document).ready(function(){
   }
 
   function shuffleStep_1() {
-    genderSlot.shuffle(4, function() {
-      // 성별이 정해지면 이름을 돌릴수 있다.
-      // 이름을 돌릴때 성도 같이 돌린다.
-      lastNameSlot.shuffle(1, shuffleStep_2);
-
-      var idx = genderSlot.active().index;
-      if(idx % 2 === 0) {
-        $('.text-machine-first-name-male').css('display', 'inline-block');
-        maleFirstNameSlot.shuffle(1);
-      } else {
-        $('.text-machine-first-name-female').css('display', 'inline-block');
-        femaleFirstNameSlot.shuffle(1);
-      }
-    });
+    genderSlot.shuffle(4, shuffleStep_1_5);
   }
+
+  function shuffleStep_1_5() {
+    // 성별이 정해지면 이름을 돌릴수 있다.
+    // 이름을 돌릴때 성도 같이 돌린다.
+
+    function runNextStepIfAvailable() {
+      if(!lastNameSlot.isRunning()
+         && !maleFirstNameSlot.isRunning()
+         && !femaleFirstNameSlot.isRunning()) {
+        shuffleStep_2();
+      }
+    }
+
+    lastNameSlot.shuffle(2, runNextStepIfAvailable);
+
+    var idx = genderSlot.active().index;
+    if(idx % 2 === 0) {
+      $('.text-machine-first-name-male').css('display', 'inline-block');
+      maleFirstNameSlot.shuffle(2, runNextStepIfAvailable);
+    } else {
+      $('.text-machine-first-name-female').css('display', 'inline-block');
+      femaleFirstNameSlot.shuffle(2, runNextStepIfAvailable);
+    }
+  }
+
   function shuffleStep_2() {
     // 년, 월을 동시에 돌린다. 월이 정해지면 날을 돌릴수 있다.
-    yearSlot.shuffle(1);
-    monthSlot.shuffle(1, function() {
+    yearSlot.shuffle(2);
+    monthSlot.shuffle(2, function() {
       // 가능한 날의 범위를 다시 잡는다
       var idx = monthSlot.active().index;
       var day = DAY_TABLE[idx];
 
       if(day === 28) {
         $('.text-machine-day-28').css('display', 'inline-block');
-        day28Slot.shuffle(1, shuffleStep_3);
+        day28Slot.shuffle(2, shuffleStep_3);
       } else if(day === 30) {
         $('.text-machine-day-30').css('display', 'inline-block');
-        day30Slot.shuffle(1, shuffleStep_3);
+        day30Slot.shuffle(2, shuffleStep_3);
       } else if(day === 31) {
         $('.text-machine-day-31').css('display', 'inline-block');
-        day31Slot.shuffle(1, shuffleStep_3);
+        day31Slot.shuffle(2, shuffleStep_3);
       }
     });
   }
 
   function shuffleStep_3() {
     // 지역은 독립정보
-    areaSlot.shuffle(1, shuffleStep_4);
+    areaSlot.shuffle(2, shuffleStep_4);
   }
 
   function shuffleStep_4() {
-    phone0Slot.shuffle(1);
-    phone1Slot.shuffle(1);
-    phone2Slot.shuffle(1, shuffleStep_5);
+    function runNextStepIfAvailable() {
+      if(!phone0Slot.isRunning() && !phone1Slot.isRunning() && !phone2Slot.isRunning()) {
+        shuffleStep_5();
+      }
+    }
+    phone0Slot.shuffle(3, runNextStepIfAvailable);
+    phone1Slot.shuffle(2, runNextStepIfAvailable);
+    phone2Slot.shuffle(2, runNextStepIfAvailable);
   }
 
   function shuffleStep_5() {
-    tel0Slot.shuffle(1);
-    tel1Slot.shuffle(1);
-    tel2Slot.shuffle(1, shuffleStep_6);
+    function runNextStepIfAvailable() {
+      if(!tel0Slot.isRunning() && !tel1Slot.isRunning() && !tel2Slot.isRunning()) {
+        shuffleStep_6();
+      }
+    }
+
+    tel0Slot.shuffle(3, runNextStepIfAvailable);
+    tel1Slot.shuffle(2, runNextStepIfAvailable);
+    tel2Slot.shuffle(3, runNextStepIfAvailable);
   }
 
   function shuffleStep_6() {

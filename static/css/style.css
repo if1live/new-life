@@ -24,12 +24,12 @@ body {
 /* begin slot machine */
 .text-machine {
     /*width:520px;*/
-    height: 40px;
-    font-size: 24px;
-    line-height: 40px;
+    height: 30px;
+    font-size: 20px;
+    line-height: 30px;
     overflow: hidden;
     display: inline-block;
-    text-align: center;
+    text-align: left;
 }
 .text-machine > * {
     padding: 0px 0px;
@@ -46,7 +46,6 @@ body {
     display: none;
 }
 /* end slot machine */
-
 
 .blockquote-alert {
     font-size: small;
