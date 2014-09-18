@@ -144,7 +144,7 @@ $(document).ready(function(){
   }
 
   function shuffleStep_1() {
-    genderSlot.shuffle(1, function() {
+    genderSlot.shuffle(4, function() {
       // 성별이 정해지면 이름을 돌릴수 있다.
       // 이름을 돌릴때 성도 같이 돌린다.
       lastNameSlot.shuffle(1, shuffleStep_2);
